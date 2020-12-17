@@ -1,6 +1,7 @@
-class User {
-  bool isNurse;
-  String username;
+import 'package:flutter/material.dart';
 
-  User(this.isNurse, this.username);
+class UserStatus {
+  final int status;
+
+  UserStatus({this.status});
 }
