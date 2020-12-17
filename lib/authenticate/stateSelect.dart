@@ -13,33 +13,9 @@ class Selector extends StatefulWidget {
 class _SelectorState extends State<Selector> {
   int userStatus;
 
-  void _initializeNurseState() {
-    setState(() {
-      userStatus = 1;
-      print(userStatus);
-      return StreamProvider<UserStatus>.value(
-        value: AuthService().status,
-        child: Wrapper(),
-      );
-    });
-  }
+  void _initializeNurseState() {}
 
-  void _initializePatientState() {
-    setState(() {
-      userStatus = 2;
-      print(userStatus);
-      UserStatus _createStatusObject(int userStatus) {
-        return userStatus != null ? UserStatus(status: userStatus) : null;
-      }
-
-      _createStatusObject(userStatus);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Wrapper(),
-          ));
-    });
-  }
+  void _initializePatientState() {}
 
   @override
   Widget build(BuildContext context) {
