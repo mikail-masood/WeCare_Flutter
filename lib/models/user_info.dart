@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+class Info {
+  final String name;
+  final String status;
 
-class UserStatus {
-  final int status;
-
-  UserStatus({this.status});
+  Info({this.name, this.status});
 }
