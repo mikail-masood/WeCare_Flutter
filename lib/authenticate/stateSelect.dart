@@ -1,21 +1,44 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wecare_2/models/user_info.dart';
-import 'package:wecare_2/services/auth.dart';
+import 'package:wecare_2/nurse_screens/nurseView.dart';
+import 'package:wecare_2/patient_screens/patientView.dart';
+import 'package:wecare_2/services/database.dart';
 
-import '../wrapper.dart';
-
-class Selector extends StatefulWidget {
+class StatusSelector extends StatefulWidget {
   @override
-  _SelectorState createState() => _SelectorState();
+  _StatusSelectorState createState() => _StatusSelectorState();
 }
 
-class _SelectorState extends State<Selector> {
-  int userStatus;
+class _StatusSelectorState extends State<StatusSelector> {
+  String status = '';
 
-  void _initializeNurseState() {}
+  Future<void> _initializeNurseState() async {
+    final userID = Provider.of<Info>(context, listen: false);
+    setState(() {
+      status = 'nurse';
+    });
+    await DatabaseService(userID.name.toString()).updateUserStatus(status);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NurseView(),
+        ));
+  }
 
-  void _initializePatientState() {}
+  void _initializePatientState() async {
+    final userID = Provider.of<Info>(context, listen: false);
+    setState(() {
+      status = 'patient';
+    });
+    await DatabaseService(userID.name.toString()).updateUserStatus(status);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PatientView(),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
